@@ -1,0 +1,58 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+defaultTasks 'clean', 'test', 'jar'
+
+group = 'com.youdevise'
+targetCompatibility = 1.6
+
+def isReleaseVersion = System.getenv('BUILD_NUMBER') != null
+def patchVersion = isReleaseVersion ? System.getenv('BUILD_NUMBER') : new Date().format('yyyyMMdd-HHmmss', TimeZone.getTimeZone('UTC'))
+def patchSeparator = isReleaseVersion ? '.' : '-'
+version = "1.0${patchSeparator}${patchVersion}"
+
+repositories {
+    mavenLocal()
+    mavenRepo url: "${repoUrl}/groups/public"
+}
+
+jar {
+    manifest { 
+        attributes(
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'youDevise Ltd',
+            'Implementation-Vendor-Id': project.group
+        )
+    }
+}
+
+dependencies {
+    compile group: 'com.google.guava',      name: 'guava',               version: '13.0.1'
+    
+    testCompile    (group: "junit",         name: "junit-dep",           version: "4.11") {
+        exclude module: "hamcrest-core"
+    }
+    testCompile group: 'org.hamcrest',      name: 'hamcrest-library',    version: '1.3'
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+     classifier = 'sources'
+     from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${project.repoUrl}/repositories/yd-release-candidates") {
+                authentication(userName: project.repoUsername, password: project.repoPassword)
+            }
+        }
+    }
+}
