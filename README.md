@@ -1,9 +1,9 @@
 Make-it-easy Templates
 ======================
 
-A trivial extension to Nat Pryce's [make-it-easy library](https://code.google.com/p/make-it-easy/) allowing data templates to be defined that allow test data to be build with using an anonymous block within an anonymous extension class, similar to the style of [JMock](http://jmock.org/cheat-sheet.html) expectations.
+A trivial extension to Nat Pryce's [make-it-easy](https://code.google.com/p/make-it-easy/) library allowing data templates to be defined so that test data can be build using an anonymous block within an anonymous extension class, similar to the style of [JMock](http://jmock.org/cheat-sheet.html) expectations.
 
-Define your apple template like this:
+Define your Apple template like this:
 ```java
 public class AppleTemplate extends DataTemplate<Apple, AppleTemplate> {
   public static final Property<Fruit, Double> ripeness = newProperty();
@@ -23,7 +23,7 @@ public class AppleTemplate extends DataTemplate<Apple, AppleTemplate> {
 }
 ```
 
-Then you can make apples like this:
+Then you can make Apple instances like this:
 ```java
 DataTemplate.derivedFromA(new AppleTemplate() {{
   with(ripeness, 1.0);
