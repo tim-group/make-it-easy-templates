@@ -30,7 +30,7 @@ jar {
 }
 
 dependencies {
-    compile group: 'com.google.guava',      name: 'guava',               version: '13.0.1'
+    compile group: 'com.natpryce',          name: 'make-it-easy',        version: '3.1.0'
     
     testCompile    (group: "junit",         name: "junit-dep",           version: "4.11") {
         exclude module: "hamcrest-core"

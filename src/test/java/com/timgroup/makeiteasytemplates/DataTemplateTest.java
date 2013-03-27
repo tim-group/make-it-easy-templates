@@ -1,4 +1,4 @@
-package com.youdevise.hip.testutils.datatemplate;
+package com.timgroup.makeiteasytemplates;
 
 import com.natpryce.makeiteasy.Instantiator;
 import com.natpryce.makeiteasy.Property;
@@ -10,7 +10,7 @@ import static com.natpryce.makeiteasy.Property.newProperty;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class DataTemplateTest {
+public final class DataTemplateTest {
 
     private static class TestData {
         public final String name;
@@ -23,7 +23,7 @@ public class DataTemplateTest {
             this.favouriteColour = favouriteColour;
         }
     }
-    
+
     private static class TestDataTemplate extends DataTemplate<TestData, TestDataTemplate> {
         public static final Property<TestData, String> _name = newProperty();
         public static final Property<TestData, String> _quest = newProperty();
@@ -40,7 +40,7 @@ public class DataTemplateTest {
             });
         }
     }
-    
+
     @Test public void
     partial_templates_can_be_filled_in_later() {
         TestDataTemplate partialTemplate = new TestDataTemplate() {{
@@ -52,7 +52,7 @@ public class DataTemplateTest {
         
         assertThat(fluffy.favouriteColour, is("Pink, thtupid!"));
     }
-    
+
     @Test public void
     already_filled_in_properties_can_be_overridden() {
         TestDataTemplate partialTemplate = new TestDataTemplate() {{
@@ -65,14 +65,14 @@ public class DataTemplateTest {
         
         assertThat(yogSoggoth.favouriteColour, is("Pink, thtupid!"));
     }
-    
+
     @Test public void
     templates_can_be_overridden_with_other_templates() {
         TestDataTemplate partialGoodTemplate = new TestDataTemplate() {{
             with(_name, "Mr Fluffy");
             with(_quest, "To bring joy to the hearts of little children everywhere");
         }};
-    
+        
         TestDataTemplate partialEvilTemplate = new TestDataTemplate() {{
             with(_quest, "To collect souls for my cosmic larvae to feed upon");
             with(_favouriteColour, "There is no mortal name for my favourite colour");
