@@ -5,7 +5,9 @@ apply plugin: 'eclipse'
 
 defaultTasks 'clean', 'test', 'jar'
 
-group = 'com.youdevise'
+group = 'com.timgroup'
+
+sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 def isReleaseVersion = System.getenv('BUILD_NUMBER') != null
