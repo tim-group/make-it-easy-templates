@@ -21,6 +21,7 @@ public class AppleTemplate extends DataTemplate<Apple, AppleTemplate> {
     });
   }
 }
+```
 
 Then you can make apples like this:
 ```java
