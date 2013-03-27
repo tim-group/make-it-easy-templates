@@ -7,7 +7,7 @@ Define your apple template like this:
 ```java
 public class AppleTemplate extends DataTemplate<Apple, AppleTemplate> {
   public static final Property<Fruit, Double> ripeness = newProperty();
-  public static final Property<Apple, Integer> leaves = newProperty();
+  public static final Property<Apple, Integer> leaves = newProperty();
 
   @Override
   public Apple build() {
