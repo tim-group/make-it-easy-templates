@@ -17,7 +17,9 @@ version = "1.0${patchSeparator}${patchVersion}"
 
 repositories {
     mavenLocal()
-    mavenRepo url: "${repoUrl}/groups/public"
+    maven {
+        url "${repoUrl}/groups/public"
+    }
 }
 
 jar {
