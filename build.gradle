@@ -85,8 +85,8 @@ uploadArchives {
             repository(url: "${project.repoUrl}/repositories/yd-release-candidates") {
                 authentication(userName: project.repoUsername, password: project.repoPassword)
             }
+            pom = tasks.pom.pom
         }
-        pom = tasks.pom.pom
     }
 }
 uploadArchives.dependsOn pom
