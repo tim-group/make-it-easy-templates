@@ -56,7 +56,7 @@ task pom {
     ext.pom = pom {
         project {
             name project.name
-            description 'A trivial extension to Nat Pryce's make-it-easy library allowing data templates to be defined'
+            description "A trivial extension to Nat Pryce's make-it-easy library allowing data templates to be defined"
             url project.url
 
             packaging 'jar'
