@@ -6,6 +6,7 @@ apply plugin: 'eclipse'
 defaultTasks 'clean', 'test', 'jar'
 
 group = 'com.timgroup'
+ext.url = 'https://github.com/tim-group/make-it-easy-templates'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -28,7 +29,8 @@ jar {
             'Implementation-Title': project.name,
             'Implementation-Version': project.version,
             'Implementation-Vendor': 'youDevise Ltd',
-            'Implementation-Vendor-Id': project.group
+            'Implementation-Vendor-Id': project.group,
+            'Implementation-URL': project.url
         )
     }
 }
@@ -48,6 +50,33 @@ task sourcesJar(type: Jar, dependsOn:classes) {
 
 artifacts {
     archives sourcesJar
+}
+
+task pom {
+    ext.pom = pom {
+        project {
+            name project.name
+            description 'A trivial extension to Nat Pryce's make-it-easy library allowing data templates to be defined'
+            url project.url
+
+            packaging 'jar'
+
+            scm {
+                url "scm:${project.url}"
+                connection 'scm:git:https://github.com/tim-group/make-it-easy-templates.git'
+                developerConnection 'scm:git:git://github.com/tim-group/make-it-easy-templates.git'
+            }
+
+            developers {
+                developer {
+                    email 'opensource@timgroup.com'
+                }
+            }
+        }
+    }
+    doLast {
+        pom.writeTo("$buildDir/pom.xml")
+    }
 }
 
 uploadArchives {
