@@ -1,3 +1,1 @@
 rootProject.name = "make-it-easy-templates"
-
-enableFeaturePreview('STABLE_PUBLISHING')
