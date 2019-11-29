@@ -15,6 +15,11 @@ repositories {
     jcenter()
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 dependencies {
     api "com.natpryce:make-it-easy:4.0.1"
     testImplementation "junit:junit:4.12"
@@ -42,20 +47,6 @@ tasks.withType(Jar).all {
     }
 }
 
-task sourcesJar(type: Jar, dependsOn:classes) {
-     archiveClassifier = 'sources'
-     from sourceSets.main.allSource
-}
-
-assemble.dependsOn(sourcesJar)
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-assemble.dependsOn(javadocJar)
-
 publishing {
     repositories {
         if (project.hasProperty("repoUrl")) {
@@ -72,8 +63,6 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId "make-it-easy-templates"
             from components.java
-            artifact(sourcesJar)
-            artifact(javadocJar)
             pom.withXml {
                 asNode().children().last() + {
                     resolveStrategy = DELEGATE_FIRST
