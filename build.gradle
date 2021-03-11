@@ -12,7 +12,7 @@ group = "com.timgroup"
 if (buildNumber) version = "1.0.$buildNumber"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 java {
